@@ -36,18 +36,24 @@
 }
 
 /* Weich rotierender Glow-Rand um die Karte */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .card::before {
   content: '';
   position: absolute;
   inset: -2px;
   border-radius: 32px;
   padding: 2px;
-  background: conic-gradient(from 0deg, #ff4d6d, #ffa6c1, #ff8fb1, #ff4d6d);
+  background: conic-gradient(from var(--border-angle), #ff4d6d, #ffa6c1, #ff8fb1, #ff4d6d);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0.55;
-  animation: spin 6s linear infinite;
+  animation: borderSpin 6s linear infinite;
   z-index: -1;
 }
 
@@ -326,8 +332,8 @@
   50% { box-shadow: 0 10px 34px rgba(255, 77, 109, 0.85); }
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+@keyframes borderSpin {
+  to { --border-angle: 360deg; }
 }
 
 @keyframes cardIn {
